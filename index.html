@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy March BFF ✨</title>
+<link href="https://fonts.googleapis.com/css2?family=Georgia&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+body{background:#fdf2f6;color:#4b2e2b;overflow-x:hidden;position:relative;}
+
+/* WRAPPER */
+.wrapper{display:flex;width:100vw;height:100vh;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;}
+
+/* SECTION */
+.section{
+min-width:100vw;height:100vh;scroll-snap-align:start;display:flex;justify-content:center;align-items:center;
+position:relative;padding:40px;opacity:0;transition:1s ease;
+}
+.section.active{opacity:1;}
+
+/* PINK GRADIENT PER PAGE */
+.section:nth-child(1){background:linear-gradient(#fde6ef,#fbd3e3);}
+.section:nth-child(2){background:linear-gradient(#fbd3e3,#f8c8dc);}
+.section:nth-child(3){background:linear-gradient(#f8c8dc,#f5b7d2);}
+.section:nth-child(4){background:linear-gradient(#f5b7d2,#f3a6c8);}
+.section:nth-child(5){background:linear-gradient(#f3a6c8,#f19ac1);}
+.section:nth-child(6){background:linear-gradient(#f19ac1,#ee89b8);}
+.section:nth-child(7){background:linear-gradient(#f19ac1,#ee89b8);}
+
+/* PAPER */
+.paper{
+background:#fffafc;width:360px;padding:35px;border-radius:12px;line-height:1.8;position:relative;
+box-shadow:0 25px 60px rgba(0,0,0,0.12);
+background-image:url("https://www.transparenttextures.com/patterns/paper-fibers.png");
+animation:paperIn 1.2s ease;
+}
+@keyframes paperIn{
+from{transform:translateY(40px) scale(.9);opacity:0;}
+to{transform:translateY(0) scale(1);opacity:1;}
+}
+.paper:before{
+content:"";position:absolute;left:0;top:0;height:100%;width:6px;
+background:#f4b6c2;border-radius:12px 0 0 12px;
+}
+
+/* TEXT */
+h1{text-align:center;color:#b85c8e;margin-bottom:15px;}
+p{font-size:14px;color:#6b4a5b;}
+.footer-text{position:absolute;font-size:11px;color:#b85c8e;bottom:8px;right:12px;}
+
+/* INPUT */
+input,textarea{width:100%;padding:10px;border:none;border-radius:6px;margin-top:10px;font-family:'Poppins',sans-serif;background:#fff;}
+textarea{resize:none;height:80px;}
+
+/* BUTTONS */
+button{margin-top:15px;padding:8px 16px;border:none;border-radius:20px;background:#e38fb0;color:white;cursor:pointer;transition:.3s;}
+button:hover{opacity:.85;}
+.next-btn{position:absolute;bottom:40px;right:40px;background:white;color:#b85c8e;padding:10px 20px;border-radius:25px;box-shadow:0 8px 20px rgba(0,0,0,0.1);}
+
+/* MESSAGE WALL */
+.wall{max-height:250px;overflow-y:auto;margin-top:15px;}
+.message-card{background:white;padding:10px;border-radius:8px;margin-bottom:10px;font-size:13px;box-shadow:0 5px 15px rgba(0,0,0,0.08);position:relative;}
+.message-card strong{color:#b85c8e;}
+.reply-box{background:#f3e4d9;margin-top:5px;padding:6px;border-radius:8px;font-size:13px;}
+.delete-btn{position:absolute;top:6px;right:8px;cursor:pointer;color:#c58b6d;}
+
+/* FLOAT DECOR */
+.decor{position:fixed;pointer-events:none;animation:floatUp linear infinite;opacity:.7;font-size:16px;}
+@keyframes floatUp{from{transform:translateY(100vh) rotate(0deg);opacity:0;}to{transform:translateY(-10vh) rotate(360deg);opacity:0;}}
+</style>
+</head>
+<body>
+
+<div class="wrapper" id="wrapper">
+
+<!-- PAGE 1 -->
+<div class="section">
+<h1>happy march bff 💖</h1>
+<div class="footer-text">from: oddie 💓 | @muelody</div>
+<button class="next-btn" onclick="next()">next →</button>
+</div>
+
+<!-- PAGE 2: Name -->
+<div class="section">
+<div class="paper">
+<h1>type your name</h1>
+<input type="text" id="username" placeholder="your name">
+</div>
+<button class="next-btn" onclick="next()">next →</button>
+</div>
+
+<!-- PAGE 3: Message Part 1 -->
+<div class="section">
+<div class="paper">
+<p id="greet"></p>
+<p>ngga kerasa ya… awal bulan maret! thank you for still being my friend 💖</p>
+</div>
+<button class="next-btn" onclick="next()">next →</button>
+</div>
+
+<!-- PAGE 4: Message Part 2 -->
+<div class="section">
+<div class="paper">
+<p>bulan ini mungkin tidaa selalu mulus, but knowing you're still here means a lot 💓</p>
+</div>
+<button class="next-btn" onclick="next()">next →</button>
+</div>
+
+<!-- PAGE 5: Message Part 3 -->
+<div class="section">
+<div class="paper">
+<p>if i ever made you uncomfortable or said something wrong, i'm sorry 😔</p>
+</div>
+<button class="next-btn" onclick="next()">next →</button>
+</div>
+
+<!-- PAGE 6: Message Part 4 -->
+<div class="section">
+<div class="paper">
+<p>here's to a happy march! stay safe, eat well, drink water, and know you're loved 💕</p>
+</div>
+<button class="next-btn" onclick="next()">next →</button>
+</div>
+
+<!-- PAGE 7: Message wall -->
+<div class="section">
+<div class="paper">
+<h1>leave your message 💌</h1>
+<input type="text" id="usernameMsg" placeholder="your name">
+<textarea id="userMessage" placeholder="write something..."></textarea>
+<button onclick="sendMessage()">send 💌</button>
+<div class="wall" id="messagesContainer"></div>
+<div class="footer-text">from: oddie 💓 | @muelody</div>
+</div>
+</div>
+
+</div>
+
+<script>
+// wrapper scroll + section fade
+const wrapper=document.getElementById("wrapper");
+const sections=document.querySelectorAll(".section");
+let current=0;
+
+// flip sound
+const flipSound=new Audio("https://assets.mixkit.co/active_storage/sfx/212/212-preview.mp3");
+
+function next(){
+if(current<sections.length-1){
+current++;
+wrapper.scrollTo({left:window.innerWidth*current,behavior:"smooth"});
+flipSound.play();
+updateGreeting();
+}
+}
+
+function checkSection(){
+sections.forEach(section=>{
+const rect=section.getBoundingClientRect();
+if(rect.left>=0&&rect.left<window.innerWidth) section.classList.add("active");
+});
+}
+wrapper.addEventListener("scroll",checkSection);
+checkSection();
+
+// greeting update
+function updateGreeting(){
+const name=document.getElementById("username").value;
+if(name) document.getElementById("greet").innerText="hi "+name+" 🤍";
+}
+
+// floating decor
+const deco=["💖","✨","🌙","⭐","🌸"];
+for(let i=0;i<50;i++){
+let d=document.createElement("div");
+d.className="decor";
+d.innerText=deco[Math.floor(Math.random()*deco.length)];
+d.style.left=Math.random()*100+"vw";
+d.style.fontSize=(Math.random()*18+12)+"px";
+d.style.animationDuration=(Math.random()*15+6)+"s";
+document.body.appendChild(d);
+}
+</script>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
+import { getDatabase, ref, push, onValue, remove, update } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-database.js";
+
+// Firebase config
+const firebaseConfig={
+apiKey: "AIzaSyDAbQ5a7_r1uPweYY22krmX6Xic7YK9F4I",
+authDomain: "marchbff.firebaseapp.com",
+databaseURL: "https://marchbff-default-rtdb.asia-southeast1.firebasedatabase.app",
+projectId: "marchbff",
+storageBucket: "marchbff.firebasestorage.app",
+messagingSenderId: "297674542897",
+appId: "1:297674542897:web:8575a47d05837ddadcea10",
+measurementId: "G-HENQTMY3HK"
+};
+
+const app=initializeApp(firebaseConfig);
+const db=getDatabase(app);
+
+// Owner mode
+if(window.location.hash==="owner"){localStorage.setItem("bff_owner","true");}
+const OWNER_MODE = localStorage.getItem("bff_owner")==="true";
+
+// Send message
+window.sendMessage=function(){
+const name=document.getElementById("usernameMsg").value||"anonymous";
+const msg=document.getElementById("userMessage").value;
+if(msg.trim()==="") return;
+push(ref(db,"messages"),{name,msg,replies:[]});
+document.getElementById("userMessage").value="";
+}
+
+// Reply & Delete
+window.replyMessage=function(id){
+if(!OWNER_MODE) return;
+const reply=prompt("write reply:");
+if(!reply) return;
+const messageRef=ref(db,"messages/"+id);
+onValue(messageRef,(snap)=>{
+let data=snap.val();
+let replies=data.replies||[];
+replies.push(reply);
+update(messageRef,{replies});
+},{onlyOnce:true});
+}
+
+window.deleteMessage=function(id){if(!OWNER_MODE) return;remove(ref(db,"messages/"+id));}
+window.deleteReply=function(id,index){
+if(!OWNER_MODE) return;
+const messageRef=ref(db,"messages/"+id);
+onValue(messageRef,(snap)=>{
+let data=snap.val();
+let replies=data.replies||[];
+replies.splice(index,1);
+update(messageRef,{replies});
+},{onlyOnce:true});
+}
+
+// Listen messages
+onValue(ref(db,"messages"),(snapshot)=>{
+const container=document.getElementById("messagesContainer");
+container.innerHTML="";
+snapshot.forEach(child=>{
+const data=child.val();
+const id=child.key;
+let repliesHTML="";
+if(data.replies){
+data.replies.forEach((r,i)=>{
+repliesHTML+=`
+<div class="reply-box">
+<b>owner:</b> ${r}
+${OWNER_MODE?`<span style="float:right;cursor:pointer;" onclick="deleteReply('${id}',${i})">🗑</span>`:""}
+</div>`;
+});
+}
+container.innerHTML+=`
+<div class="message-card">
+${OWNER_MODE?`<div class="delete-btn" onclick="deleteMessage('${id}')">🗑</div>`:""}
+<b>${data.name}</b>: ${data.msg}<br>${repliesHTML}
+</div>`;
+});
+});
+</script>
+
+</body>
+</html>
